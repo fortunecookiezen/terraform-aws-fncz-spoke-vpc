@@ -18,6 +18,54 @@ variable "enable_dns_support" {
 }
 
 
+variable "create_database_subnet_route_table" {
+  description = "Controls if separate route table for database should be created"
+  type        = bool
+  default     = false
+}
+
+variable "create_redshift_subnet_route_table" {
+  description = "Controls if separate route table for redshift should be created"
+  type        = bool
+  default     = false
+}
+
+variable "enable_public_redshift" {
+  description = "Controls if redshift should have public routing table"
+  type        = bool
+  default     = false
+}
+
+variable "create_elasticache_subnet_route_table" {
+  description = "Controls if separate route table for elasticache should be created"
+  type        = bool
+  default     = false
+}
+
+variable "create_database_subnet_group" {
+  description = "Controls if database subnet group should be created (n.b. database_subnets must also be set)"
+  type        = bool
+  default     = true
+}
+
+variable "create_elasticache_subnet_group" {
+  description = "Controls if elasticache subnet group should be created"
+  type        = bool
+  default     = true
+}
+
+variable "create_redshift_subnet_group" {
+  description = "Controls if redshift subnet group should be created"
+  type        = bool
+  default     = true
+}
+
+variable "create_database_transit_gateway_route" {
+  description = "Controls if an internet gateway route for public database access should be created"
+  type        = bool
+  default     = false
+}
+
 # strings
 
 variable "name" {
@@ -50,6 +98,24 @@ variable "isolated_subnets" {
   default     = []
 }
 
+variable "database_subnets" {
+  description = "A list of database subnets"
+  type        = list(string)
+  default     = []
+}
+
+variable "redshift_subnets" {
+  description = "A list of redshift subnets"
+  type        = list(string)
+  default     = []
+}
+
+variable "elasticache_subnets" {
+  description = "A list of elasticache subnets"
+  type        = list(string)
+  default     = []
+}
+
 variable "private_route_table_routes" {
   description = "Configuration block of routes. See https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/default_route_table#route"
   type        = list(map(string))
@@ -67,6 +133,25 @@ variable "isolated_subnet_suffix" {
   type        = string
   default     = "isolated"
 }
+
+variable "database_subnet_suffix" {
+  description = "Suffix to append to database subnets name"
+  type        = string
+  default     = "db"
+}
+
+variable "redshift_subnet_suffix" {
+  description = "Suffix to append to redshift subnets name"
+  type        = string
+  default     = "redshift"
+}
+
+variable "elasticache_subnet_suffix" {
+  description = "Suffix to append to elasticache subnets name"
+  type        = string
+  default     = "elasticache"
+}
+
 
 # maps
 variable "tags" {
@@ -93,6 +178,24 @@ variable "isolated_route_table_tags" {
   default     = {}
 }
 
+variable "database_route_table_tags" {
+  description = "Additional tags for the database route tables"
+  type        = map(string)
+  default     = {}
+}
+
+variable "redshift_route_table_tags" {
+  description = "Additional tags for the redshift route tables"
+  type        = map(string)
+  default     = {}
+}
+
+variable "elasticache_route_table_tags" {
+  description = "Additional tags for the elasticache route tables"
+  type        = map(string)
+  default     = {}
+}
+
 variable "private_subnet_tags" {
   description = "Additional tags for the private subnets"
   type        = map(string)
@@ -105,6 +208,36 @@ variable "isolated_subnet_tags" {
   default     = {}
 }
 
+variable "database_subnet_tags" {
+  description = "Additional tags for the database subnets"
+  type        = map(string)
+  default     = {}
+}
+
+variable "database_subnet_group_tags" {
+  description = "Additional tags for the database subnet group"
+  type        = map(string)
+  default     = {}
+}
+
+variable "redshift_subnet_tags" {
+  description = "Additional tags for the redshift subnets"
+  type        = map(string)
+  default     = {}
+}
+
+variable "redshift_subnet_group_tags" {
+  description = "Additional tags for the redshift subnet group"
+  type        = map(string)
+  default     = {}
+}
+
+variable "elasticache_subnet_tags" {
+  description = "Additional tags for the elasticache subnets"
+  type        = map(string)
+  default     = {}
+}
+
 variable "private_acl_tags" {
   description = "Additional tags for the private subnets network ACL"
   type        = map(string)
@@ -113,6 +246,24 @@ variable "private_acl_tags" {
 
 variable "isolated_acl_tags" {
   description = "Additional tags for the isolated subnets network ACL"
+  type        = map(string)
+  default     = {}
+}
+
+variable "database_acl_tags" {
+  description = "Additional tags for the database subnets network ACL"
+  type        = map(string)
+  default     = {}
+}
+
+variable "redshift_acl_tags" {
+  description = "Additional tags for the redshift subnets network ACL"
+  type        = map(string)
+  default     = {}
+}
+
+variable "elasticache_acl_tags" {
+  description = "Additional tags for the elasticache subnets network ACL"
   type        = map(string)
   default     = {}
 }
