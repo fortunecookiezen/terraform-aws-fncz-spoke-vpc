@@ -34,7 +34,7 @@ module "vpc" {
       destination_cidr_block = "0.0.0.0/0"
       transit_gateway_id     = "tgw-005ea974aa5468d79"
     }
-    fntc = {
+    datacenter = {
       destination_cidr_block = "10.0.0.0/8"
       transit_gateway_id     = "tgw-005ea974aa5468d79"
     }
