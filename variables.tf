@@ -1,4 +1,10 @@
 ## booleans first
+variable "attach_transit_gateway" {
+  description = "Controls if VPC should be created (it affects almost all resources)"
+  type        = bool
+  default     = false
+}
+
 variable "create_vpc" {
   description = "Controls if VPC should be created (it affects almost all resources)"
   type        = bool
@@ -152,6 +158,11 @@ variable "elasticache_subnet_suffix" {
   default     = "elasticache"
 }
 
+variable "transit_gateway_id" {
+  description = "id of the transit gateway that will be attached to"
+  type        = string
+  default     = null
+}
 
 # maps
 variable "tags" {

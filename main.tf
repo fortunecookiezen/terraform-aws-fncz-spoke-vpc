@@ -545,6 +545,9 @@ resource "aws_network_acl" "elasticache" {
 #
 # TRANSIT GATEWAY RESOURCES
 # 
-# resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
-
-# }
+resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
+  count              = var.create_vpc && var.attach_transit_gateway && length(var.private_subnets) > 0 && (length(var.private_subnets) <= length(data.aws_availability_zones.azs)) ? length(var.private_subnets) : 0
+  subnet_ids         = aws_subnet.private.*.id
+  vpc_id             = local.vpc_id
+  transit_gateway_id = var.transit_gateway_id
+}
