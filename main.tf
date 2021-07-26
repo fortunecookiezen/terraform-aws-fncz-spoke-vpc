@@ -550,4 +550,10 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
   subnet_ids         = aws_subnet.private.*.id
   vpc_id             = local.vpc_id
   transit_gateway_id = var.transit_gateway_id
+  transit_gateway_default_route_table_association = true
+  transit_gateway_default_route_table_propagation = true
+
+  tags = {
+    "Name" = format("%s-${var.private_subnet_suffix}-tga", var.name)
+  }
 }
