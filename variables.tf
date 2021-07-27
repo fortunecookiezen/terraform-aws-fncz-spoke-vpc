@@ -66,8 +66,14 @@ variable "create_redshift_subnet_group" {
   default     = true
 }
 
-variable "create_database_transit_gateway_route" {
-  description = "Controls if an internet gateway route for public database access should be created"
+variable "transit_gateway_default_route_table_association" {
+  description = "Controls if a transit gateway attachment should associate with the transit gateway default route table"
+  type        = bool
+  default     = false
+}
+
+variable "transit_gateway_default_route_table_propagation" {
+  description = "Controls if a transit gateway attachment should propagate routes to the transit gateway default route table"
   type        = bool
   default     = false
 }
