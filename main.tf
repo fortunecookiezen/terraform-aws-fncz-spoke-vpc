@@ -557,3 +557,12 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
     "Name" = format("%s-${var.private_subnet_suffix}-tga", var.name)
   }
 }
+
+resource "aws_route" "tgw" {
+  for_each = var.transit_gateway_routes
+
+  route_table_id         = aws_route_table.private[0].id
+  destination_cidr_block = each.value["destination_cidr_block"]
+  transit_gateway_id     = each.value["transit_gateway_id"]
+
+}

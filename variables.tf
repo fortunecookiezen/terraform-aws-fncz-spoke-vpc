@@ -284,3 +284,11 @@ variable "elasticache_acl_tags" {
   type        = map(string)
   default     = {}
 }
+
+
+variable "transit_gateway_routes" {
+  type = map(object({
+    destination_cidr_block = string
+    transit_gateway_id     = string
+  }))
+}

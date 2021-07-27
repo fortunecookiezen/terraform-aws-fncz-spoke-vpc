@@ -29,6 +29,11 @@ module "vpc" {
   private_subnets  = ["10.10.4.0/24", "10.10.5.0/24", "10.10.6.0/24", "10.10.7.0/24"]
   isolated_subnets = ["10.10.8.0/24", "10.10.9.0/24", "10.10.10.0/24", "10.10.11.0/24"]
 
+  attach_transit_gateway                          = true
+  transit_gateway_id                              = "tgw-005ea974aa5468d79"
+  transit_gateway_default_route_table_association = true
+  transit_gateway_default_route_table_propagation = true
+
   transit_gateway_routes = {
     default = {
       destination_cidr_block = "0.0.0.0/0"
